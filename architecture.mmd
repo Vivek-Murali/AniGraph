@@ -1,0 +1,26 @@
+flowchart TB
+    S["Permitted metadata + source documents"] --> R
+    subgraph INGEST["Rust · dependable data"]
+      R["Collect · validate · normalize"] --> C["Canonical records + committed manifest"]
+      R --> Q["Quarantine + reconciliation"]
+    end
+    C --> G["Neo4j · entities, credits, provenance"]
+    C --> T["Python · chunk + embed permitted text"]
+    T --> V["Neo4j · text chunks + vector index"]
+    U["User question"] --> P["Python · constrained retrieval planner"]
+    P --> G
+    P --> V
+    G --> E["Bounded evidence set"]
+    V --> E
+    E --> L["Python · grounded generation"]
+    L --> A["Answer + citations · or abstention"]
+    A --> D["API + demo · inspect sources and graph paths"]
+    D --> F["Reviewed outcomes + versioned evaluation"]
+    F -. "Improve without tuning on final test" .-> P
+    I["Later: permitted image + text corpus"] -. "M12 · evaluate separately" .-> T
+    classDef rust fill:#e8f1ec,stroke:#257453,color:#153a2a
+    classDef ai fill:#eaf0fa,stroke:#42679e,color:#1f3655
+    classDef store fill:#f5eee1,stroke:#8a672f,color:#503c1d
+    class R,C,Q rust
+    class T,P,L,A ai
+    class G,V store

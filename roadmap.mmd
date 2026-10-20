@@ -1,0 +1,14 @@
+flowchart LR
+    A["M01–M03 · define and contract"] --> B["M04 · Rust data slice"]
+    B --> C["M05–M06 · graph + exact baseline"]
+    C --> D["M07–M08 · semantic + hybrid retrieval"]
+    D --> E{"M09 · quality gate"}
+    E -->|"Pass"| F["M10–M11 · demo + pilot operations"]
+    E -->|"Fail"| D
+    F --> G["M12 · image extension + evaluation"]
+    G --> H["M13 · evidenced portfolio release"]
+    F -. "Text-only release: adjust title and scope" .-> H
+    classDef stage fill:#e8f1ec,stroke:#257453,color:#153a2a
+    classDef gate fill:#f5eee1,stroke:#8a672f,color:#503c1d
+    class A,B,C,D,F,G,H stage
+    class E gate
